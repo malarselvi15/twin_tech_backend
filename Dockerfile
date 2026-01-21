@@ -1,4 +1,3 @@
-# Change from 17-jdk to 21-jdk
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
@@ -10,4 +9,5 @@ RUN ./mvnw clean package
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/*.jar"]
+# Find the JAR dynamically and run
+ENTRYPOINT ["sh", "-c", "java -jar target/*.jar"]
