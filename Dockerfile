@@ -1,12 +1,11 @@
-FROM eclipse-temurin:17-jdk
+# Change from 17-jdk to 21-jdk
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
 COPY . .
 
-# Give execute permission to mvnw
 RUN chmod +x mvnw
-
 RUN ./mvnw clean package
 
 EXPOSE 8080
