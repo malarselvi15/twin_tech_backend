@@ -33,7 +33,7 @@ public class EmailService {
 
         } catch (Exception e) {
             System.out.println("❌ MAIL FAILED");
-            e.printStackTrace();   // THIS IS KEY
+            e.printStackTrace();
             throw e;
         }
     }
