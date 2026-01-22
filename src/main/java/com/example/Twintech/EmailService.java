@@ -15,19 +15,26 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     public void sendContactMail(ContactRequest request) {
+        try {
+            SimpleMailMessage mail = new SimpleMailMessage();
+            mail.setTo("twintechnologies25@gmail.com");
+            mail.setSubject("New Contact Form Message");
 
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo("twintechnologies25@gmail.com");   // COMPANY EMAIL
-        mail.setSubject("New Contact Form Message");
+            mail.setText(
+                    "Name: " + request.getName() + "\n" +
+                            "Company: " + request.getCompany() + "\n" +
+                            "Phone: " + request.getPhone() + "\n" +
+                            "Location: " + request.getLocation() + "\n\n" +
+                            "Message:\n" + request.getMessage()
+            );
 
-        mail.setText(
-                "Name: " + request.getName() + "\n" +
-                        "Company: " + request.getCompany() + "\n" +
-                        "Phone: " + request.getPhone() + "\n" +
-                        "Location: " + request.getLocation() + "\n\n" +
-                        "Message:\n" + request.getMessage()
-        );
+            mailSender.send(mail);
+            System.out.println("✅ MAIL SENT SUCCESSFULLY");
 
-        mailSender.send(mail);
+        } catch (Exception e) {
+            System.out.println("❌ MAIL FAILED");
+            e.printStackTrace();   // THIS IS KEY
+            throw e;
+        }
     }
 }
